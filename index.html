@@ -1,0 +1,47 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <title>Hai</title>
+</head>
+
+<body>
+  <button id="cat-button">Click Me!</button>
+  <div id="images">
+  </div>
+  <script src="http://code.jquery.com/jquery-2.1.3.min.js"></script>
+  <script type="text/javascript">
+    //
+    $("#cat-button").on("click", function() {
+
+      //Get API url to get a randomc at gif
+      var queryURL = "http://api.giphy.com/v1/gifs/random?api_key=dc6zaTOxFJmzC&tag=kittens";
+
+      //Make ajax call (get) from API url
+      $.ajax({
+        url: queryURL,
+        method: "GET"
+      })
+
+      //After getting the data, do the following:
+      .done(function(response) {
+
+        //Grab the image's url
+        var imageUrl = response.data.image_original_url;
+
+        //Make an image tag called catImage
+        var catImage = $("<img>");
+
+        //Make the catImage's source the image's url previously grabbed, then set alt text to "cat image"
+        catImage.attr("src", imageUrl);
+        catImage.attr("alt", "cat image");
+
+        //Pre? pend the image tag to the existing image div
+        $("#images").prepend(catImage);
+      });
+    });
+  </script>
+</body>
+
+</html>
